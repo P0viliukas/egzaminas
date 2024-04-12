@@ -1,6 +1,7 @@
 package PageData;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,6 +88,9 @@ public class CheckoutPage extends BasePage {
     public void enterText(String quote) {
         waitForElementTobeEnabled(textareaInput);
         textareaInput.sendKeys(quote);
+    }
+    public boolean alertMessage(){
+        return driver.findElement(By.className("contact-form__error")).isDisplayed();
     }
 
 }

@@ -1,5 +1,6 @@
 import PageData.CheckoutPage;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,7 +31,6 @@ public class CheckoutTest extends BaseTest{
     void userSubmitFormAllFields() throws InterruptedException {
         checkoutPage = new CheckoutPage(driver);
         JavascriptExecutor jse = (JavascriptExecutor)driver;
-
         jse.executeScript("window.scrollBy(0,250)");
         checkoutPage.enterFullname(fullname);
         checkoutPage.enterEmail(email);
@@ -41,9 +41,10 @@ public class CheckoutTest extends BaseTest{
         jse.executeScript("window.scrollBy(0,250)");
         String expierience =
                 checkoutPage.setExpierience(randomExP);
+        jse.executeScript("window.scrollBy(0,250)");
         String skill =
                 checkoutPage.setSkills(randomSkill);
-        checkoutPage.setQAtool(randomQAtool);
+        String qAtool = checkoutPage.setQAtool(randomQAtool);
         checkoutPage.enterText(quote);
         jse.executeScript("window.scrollBy(0,250)");
         checkoutPage.clickSubmit();
@@ -54,6 +55,18 @@ public class CheckoutTest extends BaseTest{
         assertEquals(gender,checkoutPage.getItemtext(4));
         assertEquals(expierience,checkoutPage.getItemtext(5));
         assertEquals(skill,checkoutPage.getItemtext(6));
-        assertEquals(quote,checkoutPage.getItemtext(7));
+        assertEquals(qAtool,checkoutPage.getItemtext(7));
+        assertEquals(quote,checkoutPage.getItemtext(8));
     }
+    @Test
+    void userCannotSubmitForm() {
+        checkoutPage = new CheckoutPage(driver);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,250)");
+        checkoutPage.enterEmail("a");
+        jse.executeScript("window.scrollBy(0,1000)");
+        checkoutPage.clickSubmit();
+        Assertions.assertTrue(checkoutPage.alertMessage());
+    }
+
 }

@@ -15,10 +15,10 @@ public class DataGenerator {
     public static String email = randomEmail;
     public static String phone = randomPhoneNumber;
     public static String quote = randomQuote;
-    public static int randomGender = random.nextInt(3);
-    public static int randomExP = random.nextInt(6);
+    public static int randomGender = random.nextInt(1,3);
+    public static int randomExP = random.nextInt(1,6);
     public static int randomSkill = random.nextInt(1,4);
-    public static int randomQAtool = random.nextInt(4);
+    public static int randomQAtool = random.nextInt(1,4);
 
 
 }
